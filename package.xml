@@ -1,6 +1,6 @@
 <package>
   <name>tmc_suction</name>
-  <version>0.24.0</version>
+  <version>1.0.0</version>
   <description>Action server for suction</description>
   <maintainer email="xr-hsr-support@mail.toyota.co.jp">HSR Support</maintainer>
 
