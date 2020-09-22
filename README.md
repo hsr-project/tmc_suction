@@ -1,35 +1,36 @@
-概要
+Overview
 =============================
-* 吸引機能を利用するためのアクションを提供する。
-* 吸引開始/終了を行うことができる。
-* 吸引開始を行う場合、タイムアウト時間内に実際に物を吸引できたかどうかが結果として返ってくる。
+* Provide actions for using the suction functions.
+* Can start/stop suction.
+* If it is the case that suction starts, returns whether or not something was suctioned up within a timeout.
 
-開発関係者
+Developer
 ================
-* 村瀬和都
+* Kazuto Murase
 
-クラス
+
+Class
 ================
 
 SuctionServer
 -------------
-* 吸引機能のためのアクションサーバークラス
+* Action server class for suction functions.
 
-インターフェース
+Interfaces
 ================
-### 提供するアクション ###
+### Provided actions ###
 tmc_suction/SuctionControlActionGoal : "/suction_control/goal":
-- duration timeout : 物体吸引タイムアウト時間(タイムアウトしたら吸引終了する)
-- std_msgs/Bool suction_on: True:吸引開始 False:吸引終了
+- duration timeout : Object suction timeout (If the timeout is reached, then suction stops).
+- std_msgs/Bool suction_on: True: suction starts, False: suction stops.
 
 tmc_suction/SuctionControlActionResult : "/suction_control/result":
-- actionlib_msgs/GoalStatus status : - actionlib_msgs::GoalStatus::PREEMPTED アクション中断   - actionlib_msgs::GoalStatus::SUCCEEDED 正常終了 - actionlib_msgs::GoalStatus::ABORTED 異常終了(物体吸引タイムアウト) - actionlib_msgs::GoalStatus::REJECTED ゴール棄却(タイムアウト時間durationに負値が入っていた場合)
+- actionlib_msgs/GoalStatus status : - actionlib_msgs::GoalStatus::PREEMPTED Action interrupted - actionlib_msgs::GoalStatus::SUCCEEDED Successful completion - actionlib_msgs::GoalStatus::ABORTED Abnormal termination (Object suction timeout) - actionlib_msgs::GoalStatus::REJECTED Goal rejected (When the timeout duration contains a negative number).
 
-### 購読するトピック ###
-std_msgs/Bool : "/pressure_sensor_on": 実際に物を吸引しているかどうかデバイス側から取得
+### Subscribed topic ###
+std_msgs/Bool : "/pressure_sensor_on": Obtain from the device whether or not it is actually suctioning up something.
 
-### 発行するトピック ###
-std_msgs/Bool : "/suction_on": デバイス側に吸引開始/終了の命令を伝える
+### Published topic ###
+std_msgs/Bool : "/suction_on": Transmit suction start/stop commands to the device.
 
 LICENSE
 ================
